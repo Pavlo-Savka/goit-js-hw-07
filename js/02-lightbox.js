@@ -7,14 +7,11 @@ for (let item of galleryItems) {
     let description = item.description;
     gallery.insertAdjacentHTML('beforeend', 
 `<a class="gallery__item" href="${largeImg}">
-  <img class="gallery__image" src="${smallImg}" alt="${description}" />
+  <img class="gallery__image" src="${smallImg}" 
+  alt="${description}" />
 </a>`)
 };
-
-var lightbox = new SimpleLightbox('.gallery a', { 
+new SimpleLightbox('.gallery a', { 
     captionsData: "alt",
     captionDelay: 250,
  });
-
-
-console.log(galleryItems);

@@ -19,18 +19,23 @@ gallery.insertAdjacentHTML('beforeend', `<div class= "gallery__item">
 };
 
 const selectImg = (event) => {
-    if (event.target.nodeName !== "IMG") {return};
-  const selectedImg = event.target.parentNode.href; 
+  if (event.target.nodeName !== "IMG")
+   return;
+  const selectedImg = event.target.parentNode.href;
   event.preventDefault();
-  const instance = basicLightbox.create(`<img src="${selectedImg}" width = "800" height = "600">`);
+  const instance = basicLightbox.create(`<img src="${selectedImg}" width = "800" height = "600">`,
+    {
+      onShow: () =>
+        document.addEventListener("keydown", handleKeyDown),
+      onClose: () =>
+        document.removeEventListener("keydown", handleKeyDown),
+    }
+  );
   instance.show();
-
-  document.addEventListener("keydown", event => {
+  function handleKeyDown(event) {
     if (event.code === 'Escape') {
       instance.close();
     };
-  },
-   { once: true }
-  );
-}
+  };  
+};
 gallery.addEventListener("click", selectImg);
